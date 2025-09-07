@@ -7,6 +7,7 @@ Vagrant.configure("2") do |config|
     web.vm.provider "vmware_desktop" do |vmw|
       vmw.memory = "1024"
      end
+     web.vm.provision "shell", path: "scripts/provision-web-ubuntu.sh"
   end
 
   # Database server
@@ -17,5 +18,6 @@ Vagrant.configure("2") do |config|
     db.vm.provider "vmware_desktop" do |vmw|
       vmw.memory = "1024"
      end
+     db.vm.provision "shell", path: "scripts/provision-db-centos.sh"
   end
 end
