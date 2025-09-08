@@ -27,10 +27,10 @@ systemctl enable --now mysqld
 # systemctl restart mysqld
 
 # Optional: Create a database and user
-# echo "=== Creating database and user ==="
-# mysql -e "CREATE USER 'myuser'@'%' IDENTIFIED BY 'mypassword';"
-# mysql -e "CREATE DATABASE mydb;"
-# mysql -e "GRANT ALL PRIVILEGES ON mydb.* TO 'myuser'@'%';"
-# mysql -e "FLUSH PRIVILEGES;"
+echo "=== Creating database and user ==="
+mysql -e "CREATE USER 'myuser'@'%' IDENTIFIED BY 'mypassword';"
+mysql -e "CREATE DATABASE mydb;"
+mysql -e "GRANT ALL PRIVILEGES ON mydb.* TO 'myuser'@'%';"
+mysql -e "FLUSH PRIVILEGES;"
 
 echo "=== MySQL installation completed ==="
