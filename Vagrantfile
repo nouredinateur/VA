@@ -1,4 +1,7 @@
 Vagrant.configure("2") do |config|
+
+  config.vm.synced_folder "./website", "/srv/website"
+
   # Web server
   config.vm.define "web" do |web|
     web.vm.box = "spox/ubuntu-arm"
