@@ -20,7 +20,7 @@ npm install -g pm2
 apt-get install -y nginx
 
 # Set app directory
-APP_DIR="/srv/website/SuperHeros"
+APP_DIR="/vagrant/website/SuperHeros"
 
 # Navigate to app directory
 cd "$APP_DIR"
