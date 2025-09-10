@@ -27,9 +27,13 @@ cd "$APP_DIR"
 
 # Install app dependencies
 yarn install
- 
-# Start the app with PM2
+
+# Build the Next.js app for production
+# yarn build
+
+echo "Start the app with PM2"
 pm2 start yarn --name "superheros" -- dev
+
 # Save PM2 processes and set up to start on boot
 pm2 save
 pm2 startup systemd -u vagrant --hp /home/vagrant
