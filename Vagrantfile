@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
 
-  config.vm.synced_folder "./website", "/srv/website"
+  config.vm.synced_folder "./website", "/home/vagrant/website"
 
   # Web server
   config.vm.define "web" do |web|
