@@ -18,6 +18,7 @@ Vagrant.configure("2") do |config|
     db.vm.box = "bento/centos-stream-9"
     db.vm.hostname = "db"
     db.vm.network "private_network", ip: "192.168.56.11"
+    db.vm.network "forwarded_port", guest: 3307, host: 1337
     db.vm.provider "vmware_desktop" do |vmw|
       vmw.memory = "1024"
      end
