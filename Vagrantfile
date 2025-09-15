@@ -10,6 +10,7 @@ Vagrant.configure("2") do |config|
     web.vm.network "public_network", bridge: "en0: Wi-Fi (AirPort)"
     web.vm.provider "vmware_desktop" do |vmw|
       vmw.memory = "1024"
+      vmw.cpus = 1
      end
      web.vm.provision "shell", path: "scripts/provision-web-ubuntu.sh"
   end
@@ -27,6 +28,7 @@ Vagrant.configure("2") do |config|
     db.vm.synced_folder "./database", "/home/vagrant/database"
     db.vm.provider "vmware_desktop" do |vmw|
       vmw.memory = "1024"
+      vmw.cpus = 1
      end
      db.vm.provision "shell", path: "scripts/provision-db-centos.sh"
   end
