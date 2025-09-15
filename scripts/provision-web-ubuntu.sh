@@ -21,6 +21,16 @@ apt-get install -y nginx
 
 # Set app directory
 APP_DIR="/vagrant/website/SuperHeros"
+SERVER_APP_DIR="/vagrant/website/superhero-api"
+
+echo "navigate to api folder"
+cd "$SERVER_APP_DIR"
+
+
+echo "install dependencies to api folder"
+sudo yarn install
+sudo yarn dev
+
 
 # Navigate to app directory
 cd "$APP_DIR"
