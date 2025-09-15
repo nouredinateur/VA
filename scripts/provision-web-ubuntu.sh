@@ -14,7 +14,6 @@ apt-get install -y nodejs
 npm install -g yarn
 
 # Install PM2 for process management
-npm install -g pm2
 
 # Install Nginx for reverse proxy
 apt-get install -y nginx
@@ -29,24 +28,19 @@ cd "$SERVER_APP_DIR"
 
 echo "install dependencies to api folder"
 sudo yarn install
-sudo yarn dev
+sudo yarn build
+sudo yarn start
 
 
 # Navigate to app directory
 cd "$APP_DIR"
 
 # Install app dependencies
-yarn install
-
+sudo yarn install
 # Build the Next.js app for production
-# yarn build
 
-echo "Start the app with PM2"
-pm2 start yarn --name "superheros" -- dev
-
-# Save PM2 processes and set up to start on boot
-pm2 save
-pm2 startup systemd -u vagrant --hp /home/vagrant
+sudo yarn build
+sudo yarn start
 
 # Configure Nginx reverse proxy
 cat <<EOF > /etc/nginx/sites-available/superheros
