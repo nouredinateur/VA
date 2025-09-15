@@ -18,7 +18,12 @@ Vagrant.configure("2") do |config|
     db.vm.box = "bento/centos-stream-9"
     db.vm.hostname = "db"
     db.vm.network "private_network", ip: "192.168.56.11"
-    db.vm.network "forwarded_port", guest: 3307, host: 1337
+
+    # redirige le port MySQL vers l’hôte
+    db.vm.network "forwarded_port", guest: 3306, host: 3307
+
+    # partage le dossier contenant vos scripts SQL
+    db.vm.synced_folder "./database", "/home/vagrant/database"
     db.vm.provider "vmware_desktop" do |vmw|
       vmw.memory = "1024"
      end

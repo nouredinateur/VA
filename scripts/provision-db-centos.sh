@@ -23,14 +23,25 @@ systemctl enable --now mysqld
 
 # Optional: Configure MySQL to allow remote connections
 # echo "=== Configuring MySQL for remote connections ==="
-# sed -i 's/bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/' /etc/my.cnf.d/mysql-server.cnf
-# systemctl restart mysqld
+# Autoriser l’écoute sur toutes les interfaces
+echo "=== Autoriser les connexions distantes ==="
+sed -i 's/^bind-address\s*=.*/bind-address = 0.0.0.0/' /etc/my.cnf.d/mysql-server.cnf
+systemctl restart mysqld
 
-# Optional: Create a database and user
-echo "=== Creating database and user ==="
-mysql -e "CREATE USER 'myuser'@'%' IDENTIFIED BY 'mypassword';"
-mysql -e "CREATE DATABASE mydb;"
-mysql -e "GRANT ALL PRIVILEGES ON mydb.* TO 'myuser'@'%';"
+# Ouvrir le port 3306 dans firewalld
+firewall-cmd --add-service=mysql --permanent
+firewall-cmd --reload
+
+# Créer la base / l’utilisateur
+echo "=== Création de la base et de l’utilisateur ==="
+mysql -e "CREATE USER IF NOT EXISTS 'myuser'@'%' IDENTIFIED BY 'mypassword';"
+mysql -e "CREATE DATABASE IF NOT EXISTS superhero_db;"
+mysql -e "GRANT ALL PRIVILEGES ON superhero_db.* TO 'myuser'@'%';"
 mysql -e "FLUSH PRIVILEGES;"
 
-echo "=== MySQL installation completed ==="
+# Importer les données de démonstration
+echo "=== Import des données ==="
+mysql -umyuser -pmypassword superhero_db < /home/vagrant/database/create-table.sql
+mysql -umyuser -pmypassword superhero_db < /home/vagrant/database/insert-demo-data.sql
+
+echo "=== Installation MySQL terminée ==="
