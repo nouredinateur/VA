@@ -7,6 +7,7 @@ Vagrant.configure("2") do |config|
     web.vm.box = "spox/ubuntu-arm"
     web.vm.hostname = "web"
     web.vm.network "private_network", ip: "192.168.56.10"
+    web.vm.network "public_network", bridge: "en0: Wi-Fi (AirPort)"
     web.vm.provider "vmware_desktop" do |vmw|
       vmw.memory = "1024"
      end
